@@ -1,4 +1,4 @@
-package com.bulletapps.bomdiacaloteiro.ui.screens
+package com.bulletapps.bomdiacaloteiro.ui.screens.selectMeme
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 
 
-class MemesViewModel: ViewModel() {
+class SelectMemeViewModel: ViewModel() {
 
     val uiState = UIState()
 
@@ -50,7 +50,7 @@ class MemesViewModel: ViewModel() {
         R.drawable.img_31,
     )
 
-    class UIState() {
+    class UIState {
         val memesRef = MutableStateFlow(listOf<Int>())
     }
 }
