@@ -1,8 +1,20 @@
 package com.bulletapps.bomdiacaloteiro.ui.screens
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.bulletapps.bomdiacaloteiro.R
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 
-class MemesViewModel {
+
+
+class MemesViewModel: ViewModel() {
+
+    val uiState = UIState()
+
+    fun setup() = viewModelScope.launch {
+        uiState.memesRef.value = getMemesRef()
+    }
 
     private fun getMemesRef() = listOf(
         R.drawable.img_01,
@@ -37,4 +49,8 @@ class MemesViewModel {
         R.drawable.img_30,
         R.drawable.img_31,
     )
+
+    class UIState() {
+        val memesRef = MutableStateFlow(listOf<Int>())
+    }
 }
