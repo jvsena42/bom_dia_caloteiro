@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import com.bulletapps.bomdiacaloteiro.ui.screens.selectMeme.ScreenSelectMeme
 import com.bulletapps.bomdiacaloteiro.util.setNavigation
 
 class MainActivity : ComponentActivity() {
@@ -26,6 +28,9 @@ class MainActivity : ComponentActivity() {
 }
 
 private fun navigationBuilder(builder: NavGraphBuilder) = builder.apply {
+    composable(MainViewModel.Navigation.SelectMeme.router) {
+        ScreenSelectMeme(navigateToMessageInfo = { }) //TODO implement
+    }
 
 }
 

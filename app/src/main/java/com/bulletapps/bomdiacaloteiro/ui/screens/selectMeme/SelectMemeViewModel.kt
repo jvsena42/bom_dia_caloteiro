@@ -55,7 +55,7 @@ class SelectMemeViewModel: ViewModel() {
     }
 
     class UIState {
-        val memesRef = MutableStateFlow(listOf<Int>())
+        val memesRef: MutableStateFlow<List<Int>> = MutableStateFlow(emptyList())
     }
 
     sealed interface ScreenActions {
