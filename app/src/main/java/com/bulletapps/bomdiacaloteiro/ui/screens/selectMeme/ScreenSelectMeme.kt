@@ -116,7 +116,7 @@ fun MakeItemImage(modifier: Modifier = Modifier, imageRef: Int) {
 
 @Preview(showBackground = true)
 @Composable
-fun preview() {
+private fun Preview() {
     Screen(
         uiState = SelectMemeViewModel.UIState().apply {
             memesRef.value = listOf(

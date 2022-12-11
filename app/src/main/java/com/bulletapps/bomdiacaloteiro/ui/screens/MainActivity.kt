@@ -27,17 +27,21 @@ class MainActivity : ComponentActivity() {
             )
         }
     }
-}
 
-private fun navigationBuilder(builder: NavGraphBuilder) = builder.apply {
-    composable(MainViewModel.Navigation.SelectMeme.router) {
-        ScreenSelectMeme(navigateToMessageInfo = { }) //TODO implement
+    private fun navigationBuilder(builder: NavGraphBuilder) = builder.apply {
+        composable(MainViewModel.Navigation.SelectMeme.router) {
+            ScreenSelectMeme(
+                navigateToMessageInfo = {
+                    mainViewModel.navigate(MainViewModel.Navigation.MessageInfo)
+                }
+            )
+        }
+
     }
 
-}
-
-private fun navEvent(navController: NavController, navScreen: MainViewModel.Navigation) {
-    navController.navigate(route = navScreen.router) {
-        launchSingleTop = true
+    private fun navEvent(navController: NavController, navScreen: MainViewModel.Navigation) {
+        navController.navigate(route = navScreen.router) {
+            launchSingleTop = true
+        }
     }
 }
