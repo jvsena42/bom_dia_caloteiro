@@ -9,9 +9,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -47,7 +50,8 @@ private fun Screen(
                         text = stringResource(id = R.string.select_a_meme),
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
-                        fontSize = 24.sp
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Black
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -81,5 +85,27 @@ fun MakeItemImage(modifier: Modifier = Modifier, imageRef: Int) {
             contentDescription = stringResource(id = R.string.select_a_meme),
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun preview() {
+    Screen(
+        uiState = SelectMemeViewModel.UIState().apply {
+                memesRef.value = listOf(
+                    R.drawable.img_01,
+                    R.drawable.img_02,
+                    R.drawable.img_03,
+                    R.drawable.img_04,
+                    R.drawable.img_05,
+                    R.drawable.img_06,
+                    R.drawable.img_07,
+                    R.drawable.img_08,
+                    R.drawable.img_09,
+                    R.drawable.img_10,
+                )
+        },
+        onAction = {}
+    )
 }
 
