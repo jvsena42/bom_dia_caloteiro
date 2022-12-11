@@ -50,7 +50,15 @@ class SelectMemeViewModel: ViewModel() {
         R.drawable.img_31,
     )
 
+    fun onAction(action: ScreenActions) = when(action) {
+        is ScreenActions.OnImageSelected -> { }
+    }
+
     class UIState {
         val memesRef = MutableStateFlow(listOf<Int>())
+    }
+
+    sealed interface ScreenActions {
+        data class OnImageSelected(private val ref: Int) : ScreenActions
     }
 }
