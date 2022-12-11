@@ -92,18 +92,18 @@ fun MakeItemImage(modifier: Modifier = Modifier, imageRef: Int) {
 fun preview() {
     Screen(
         uiState = SelectMemeViewModel.UIState().apply {
-                memesRef.value = listOf(
-                    R.drawable.img_01,
-                    R.drawable.img_02,
-                    R.drawable.img_03,
-                    R.drawable.img_04,
-                    R.drawable.img_05,
-                    R.drawable.img_06,
-                    R.drawable.img_07,
-                    R.drawable.img_08,
-                    R.drawable.img_09,
-                    R.drawable.img_10,
-                )
+            memesRef.value = listOf(
+                R.drawable.img_01,
+                R.drawable.img_02,
+                R.drawable.img_03,
+                R.drawable.img_04,
+                R.drawable.img_05,
+                R.drawable.img_06,
+                R.drawable.img_07,
+                R.drawable.img_08,
+                R.drawable.img_09,
+                R.drawable.img_10,
+            )
         },
         onAction = {}
     )
