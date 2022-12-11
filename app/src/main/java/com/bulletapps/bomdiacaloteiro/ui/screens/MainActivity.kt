@@ -9,7 +9,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.bulletapps.bomdiacaloteiro.ui.screens.selectMeme.ScreenSelectMeme
 import com.bulletapps.bomdiacaloteiro.util.setNavigation
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()

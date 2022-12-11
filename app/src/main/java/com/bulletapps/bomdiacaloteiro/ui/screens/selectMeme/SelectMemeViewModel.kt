@@ -3,12 +3,14 @@ package com.bulletapps.bomdiacaloteiro.ui.screens.selectMeme
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bulletapps.bomdiacaloteiro.R
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-
-class SelectMemeViewModel: ViewModel() {
+@HiltViewModel
+class SelectMemeViewModel @Inject constructor() : ViewModel() {
 
     val uiState = UIState()
 
@@ -50,8 +52,8 @@ class SelectMemeViewModel: ViewModel() {
         R.drawable.img_31,
     )
 
-    fun onAction(action: ScreenActions) = when(action) {
-        is ScreenActions.OnImageSelected -> { }
+    fun onAction(action: ScreenActions) = when (action) {
+        is ScreenActions.OnImageSelected -> {}
     }
 
     class UIState {

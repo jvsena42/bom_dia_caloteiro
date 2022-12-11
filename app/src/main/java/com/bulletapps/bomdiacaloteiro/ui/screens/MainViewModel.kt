@@ -3,8 +3,11 @@ package com.bulletapps.bomdiacaloteiro.ui.screens
 import androidx.lifecycle.ViewModel
 import com.bulletapps.bomdiacaloteiro.util.EventFlow
 import com.bulletapps.bomdiacaloteiro.util.EventFlowImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel : ViewModel(),
+@HiltViewModel
+class MainViewModel @Inject constructor() : ViewModel(),
     EventFlow<MainViewModel.Navigation> by EventFlowImpl() {
 
     sealed class Navigation(
