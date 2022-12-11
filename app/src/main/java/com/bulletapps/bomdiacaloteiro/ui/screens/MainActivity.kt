@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.ScreenMessageInfo
 import com.bulletapps.bomdiacaloteiro.ui.screens.selectMeme.ScreenSelectMeme
 import com.bulletapps.bomdiacaloteiro.util.setNavigation
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +39,9 @@ class MainActivity : ComponentActivity() {
             )
         }
 
+        composable(MainViewModel.Navigation.MessageInfo.router) {
+            ScreenMessageInfo()
+        }
     }
 
     private fun navEvent(navController: NavController, navScreen: MainViewModel.Navigation) {
