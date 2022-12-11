@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Bom dia Caloteiro</string>
     <string name="select_a_meme">Selecione um meme</string>
+    <string name="custom_the_text">Customize o texto</string>
 </resources>
