@@ -11,6 +11,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor() : ViewModel(),
     EventFlow<MainViewModel.Navigation> by EventFlowImpl() {
 
+    var selectedMemeRef: Int? = null
+
     fun navigate(navigation: Navigation) {
         viewModelScope.sendEvent(navigation)
     }

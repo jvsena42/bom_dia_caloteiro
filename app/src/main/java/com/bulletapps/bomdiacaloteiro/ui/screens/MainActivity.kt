@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
     private fun navigationBuilder(builder: NavGraphBuilder) = builder.apply {
         composable(MainViewModel.Navigation.SelectMeme.router) {
             ScreenSelectMeme(
-                navigateToMessageInfo = {
+                navigateToMessageInfo = { imageRef ->
+                    mainViewModel.selectedMemeRef = imageRef
                     mainViewModel.navigate(MainViewModel.Navigation.MessageInfo)
                 }
             )
