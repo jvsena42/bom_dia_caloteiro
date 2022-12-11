@@ -3,6 +3,9 @@ package com.bulletapps.bomdiacaloteiro.ui.screens.selectMeme
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bulletapps.bomdiacaloteiro.R
+import com.bulletapps.bomdiacaloteiro.ui.screens.MainViewModel
+import com.bulletapps.bomdiacaloteiro.util.EventFlow
+import com.bulletapps.bomdiacaloteiro.util.EventFlowImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -10,7 +13,8 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class SelectMemeViewModel @Inject constructor() : ViewModel() {
+class SelectMemeViewModel @Inject constructor() : ViewModel(),
+    EventFlow<SelectMemeViewModel.ScreenEvents> by EventFlowImpl() {
 
     val uiState = UIState()
 
@@ -53,7 +57,9 @@ class SelectMemeViewModel @Inject constructor() : ViewModel() {
     )
 
     fun onAction(action: ScreenActions) = when (action) {
-        is ScreenActions.OnImageSelected -> {}
+        is ScreenActions.OnImageSelected -> {
+            viewModelScope.sendEvent(ScreenEvents.NavigateMemeDetailScreen(action.ref))
+        }
     }
 
     class UIState {
@@ -61,6 +67,10 @@ class SelectMemeViewModel @Inject constructor() : ViewModel() {
     }
 
     sealed interface ScreenActions {
-        data class OnImageSelected(private val ref: Int) : ScreenActions
+        data class OnImageSelected(val ref: Int) : ScreenActions
+    }
+
+    sealed interface ScreenEvents {
+        data class NavigateMemeDetailScreen(val ref: Int) : ScreenEvents
     }
 }

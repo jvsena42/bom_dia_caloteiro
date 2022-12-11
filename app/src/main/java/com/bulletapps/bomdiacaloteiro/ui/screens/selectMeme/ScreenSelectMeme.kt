@@ -1,10 +1,12 @@
 package com.bulletapps.bomdiacaloteiro.ui.screens.selectMeme
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -20,14 +22,32 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bulletapps.bomdiacaloteiro.R
 import com.bulletapps.bomdiacaloteiro.ui.theme.BomDiaCaloteiroTheme
+import kotlinx.coroutines.flow.collect
 
 @Composable
 fun ScreenSelectMeme(
     viewModel: SelectMemeViewModel = hiltViewModel(),
-    navigateToMessageInfo: () -> Unit
+    navigateToMessageInfo: (Int) -> Unit
 ) {
     viewModel.setup()
     Screen(uiState = viewModel.uiState, onAction = viewModel::onAction)
+    EventConsumer(viewModel = viewModel, navigateToMessageInfo = navigateToMessageInfo)
+}
+
+@Composable
+private fun EventConsumer(
+    viewModel: SelectMemeViewModel,
+    navigateToMessageInfo: (Int) -> Unit
+) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.eventFlow.collect { event ->
+            when (event) {
+                is SelectMemeViewModel.ScreenEvents.NavigateMemeDetailScreen -> navigateToMessageInfo.invoke(
+                    event.ref
+                )
+            }
+        }
+    }
 }
 
 @Composable
@@ -60,13 +80,20 @@ private fun Screen(
                 items(list.size) { index ->
                     val item = list[index]
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
                     MakeItemImage(
                         imageRef = item,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(250.dp)
+                            .clickable {
+                                onAction(
+                                    SelectMemeViewModel.ScreenActions.OnImageSelected(
+                                        item
+                                    )
+                                )
+                            }
                     )
                 }
             }
@@ -77,7 +104,7 @@ private fun Screen(
 @Composable
 fun MakeItemImage(modifier: Modifier = Modifier, imageRef: Int) {
     Box(
-        modifier = modifier
+        modifier = modifier.padding(horizontal = 16.dp)
     ) {
         Image(
             modifier = Modifier.fillMaxSize(),
