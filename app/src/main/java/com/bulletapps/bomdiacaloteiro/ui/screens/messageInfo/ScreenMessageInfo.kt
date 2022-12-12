@@ -67,6 +67,14 @@ fun Screen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        Text(
+            text = stringResource(id = R.string.preview),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            textAlign = TextAlign.Start,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+
         Spacer(modifier = Modifier.weight(1f))
 
         MakeButtonShare(uiState = uiState, onAction = onAction)
