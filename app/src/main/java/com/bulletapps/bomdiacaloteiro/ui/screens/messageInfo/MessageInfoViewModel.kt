@@ -18,6 +18,10 @@ import javax.inject.Inject
 class MessageInfoViewModel @Inject constructor() : ViewModel(),
     EventFlow<MessageInfoViewModel.ScreenEvents> by EventFlowImpl() {
 
+    companion object {
+        const val LINE_BREAK = "\n"
+    }
+
     val uiState = UIState()
 
     fun setup(selectedMemeRef: Int?) {
@@ -33,14 +37,18 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
         }
         is ScreenActions.OnTextChanged -> {
             onTextChanged(action.fieldText)
+            updateFullText()
         }
 
     }
 
     private fun updateFullText() {
-        //todo implement
+        val message =
+            uiState.message.value.let { if (it.isNotEmpty()) LINE_BREAK + it else EMPTY_STRING }
+        val pixKey =
+            uiState.pixKey.value.let { if (it.isNotEmpty()) LINE_BREAK + it else EMPTY_STRING }
+        uiState.fullMessage.value = "Bom dia, caloteiro!" + message + pixKey
     }
-
     private fun onTextChanged(fieldText: FieldTexts) = when (fieldText) {
         is FieldTexts.Message -> uiState.message.value = fieldText.text
         is FieldTexts.PixKey -> uiState.pixKey.value = fieldText.text

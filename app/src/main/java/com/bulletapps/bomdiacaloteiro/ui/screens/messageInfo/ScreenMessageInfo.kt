@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -75,9 +76,38 @@ fun Screen(
             fontWeight = FontWeight.Bold
         )
 
+        Spacer(modifier = Modifier.height(8.dp))
+
+        MakeBoxPreview(onAction = onAction, uiState = uiState)
+
         Spacer(modifier = Modifier.weight(1f))
 
         MakeButtonShare(uiState = uiState, onAction = onAction)
+    }
+}
+
+@Composable
+private fun MakeBoxPreview(
+    uiState: UIState,
+    onAction: (ScreenActions) -> Unit
+) {
+    val fullMessage by uiState.fullMessage.collectAsState()
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+            .background(Color.Gray),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = fullMessage,
+            fontSize = 16.sp,
+            maxLines = 10,
+            textAlign = TextAlign.Start,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(16.dp).fillMaxWidth()
+        )
     }
 }
 
@@ -126,7 +156,7 @@ private fun MakeFieldPix(onAction: (ScreenActions) -> Unit, uiState: UIState) {
     OutlinedTextField(
         value = pixKey,
         singleLine = true,
-        onValueChange = { onAction(ScreenActions.OnTextChanged(FieldTexts.Message(it))) },
+        onValueChange = { onAction(ScreenActions.OnTextChanged(FieldTexts.PixKey(it))) },
         label = { Text(stringResource(R.string.pix_key)) },
         modifier = Modifier
             .padding(horizontal = 16.dp)
