@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         }
 
         composable(MainViewModel.Navigation.MessageInfo.router) {
-            ScreenMessageInfo()
+            ScreenMessageInfo(selectedMemeRef = mainViewModel.selectedMemeRef)
         }
     }
 

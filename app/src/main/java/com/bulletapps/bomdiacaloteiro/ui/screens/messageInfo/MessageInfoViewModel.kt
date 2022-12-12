@@ -20,8 +20,10 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
 
     val uiState = UIState()
 
-    fun setup(selectedMemeRef: Int) {
-        uiState.selectedMemeRef.value = selectedMemeRef
+    fun setup(selectedMemeRef: Int?) {
+        selectedMemeRef?.let {
+            uiState.selectedMemeRef.value = selectedMemeRef
+        }
     }
 
     @Suppress("IMPLICIT_CAST_TO_ANY")

@@ -3,4 +3,6 @@
     <string name="select_a_meme">Selecione um meme</string>
     <string name="custom_the_text">Customize o texto</string>
     <string name="share">Compartilhar</string>
+    <string name="message">Mensagem</string>
+    <string name="pix_key">Chave pix</string>
 </resources>
