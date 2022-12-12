@@ -20,6 +20,7 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
 
     companion object {
         const val LINE_BREAK = "\n"
+        const val INITIAL_MESSAGE = "Bom dia, caloteiro!" //todo MOVE DO STRINGS
     }
 
     val uiState = UIState()
@@ -47,7 +48,7 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
             uiState.message.value.let { if (it.isNotEmpty()) LINE_BREAK + it else EMPTY_STRING }
         val pixKey =
             uiState.pixKey.value.let { if (it.isNotEmpty()) LINE_BREAK + it else EMPTY_STRING }
-        uiState.fullMessage.value = "Bom dia, caloteiro!" + message + pixKey
+        uiState.fullMessage.value = INITIAL_MESSAGE + message + pixKey
     }
     private fun onTextChanged(fieldText: FieldTexts) = when (fieldText) {
         is FieldTexts.Message -> uiState.message.value = fieldText.text
@@ -63,7 +64,7 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
         val selectedMemeRef: MutableStateFlow<Int> = MutableStateFlow(NEGATIVE)
         val message: MutableStateFlow<String> = MutableStateFlow(EMPTY_STRING)
         val pixKey: MutableStateFlow<String> = MutableStateFlow(EMPTY_STRING)
-        val fullMessage: MutableStateFlow<String> = MutableStateFlow(EMPTY_STRING)
+        val fullMessage: MutableStateFlow<String> = MutableStateFlow(INITIAL_MESSAGE)
     }
 
     sealed interface ScreenActions {
