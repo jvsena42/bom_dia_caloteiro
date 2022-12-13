@@ -34,7 +34,12 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
     @Suppress("IMPLICIT_CAST_TO_ANY")
     fun onAction(action: ScreenActions) = when (action) {
         is ScreenActions.OnClickShare -> {
-            viewModelScope.sendEvent(ScreenEvents.SendWhatsappMessage(uiState.selectedMemeRef.value))
+            viewModelScope.sendEvent(
+                ScreenEvents.SendWhatsappMessage(
+                    uiState.selectedMemeRef.value,
+                    uiState.fullMessage.value
+                )
+            )
         }
         is ScreenActions.OnTextChanged -> {
             onTextChanged(action.fieldText)
@@ -50,6 +55,7 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
             uiState.pixKey.value.let { if (it.isNotEmpty()) LINE_BREAK + it else EMPTY_STRING }
         uiState.fullMessage.value = INITIAL_MESSAGE + message + pixKey
     }
+
     private fun onTextChanged(fieldText: FieldTexts) = when (fieldText) {
         is FieldTexts.Message -> uiState.message.value = fieldText.text
         is FieldTexts.PixKey -> uiState.pixKey.value = fieldText.text
@@ -73,6 +79,6 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
     }
 
     sealed interface ScreenEvents {
-        data class SendWhatsappMessage(val ref: Int) : ScreenEvents
+        data class SendWhatsappMessage(val imageRef: Int, val text: String) : ScreenEvents
     }
 }

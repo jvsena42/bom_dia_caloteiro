@@ -2,19 +2,29 @@
 
 package com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo
 
+import android.content.Intent
+import android.graphics.Bitmap
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,15 +36,37 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bulletapps.bomdiacaloteiro.R
-import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.*
+import com.bulletapps.bomdiacaloteiro.ui.screens.MainActivity
+import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.FieldTexts
+import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenActions
+import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenEvents
+import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.UIState
+import com.bulletapps.bomdiacaloteiro.util.getBitmapFromResource
+import com.bulletapps.bomdiacaloteiro.util.intentShare
 
 @Composable
 fun ScreenMessageInfo(
     viewModel: MessageInfoViewModel = hiltViewModel(),
-    selectedMemeRef: Int?
+    selectedMemeRef: Int?,
+    shareContent: (String, Int) -> Unit
 ) {
     viewModel.setup(selectedMemeRef)
     Screen(uiState = viewModel.uiState, onAction = viewModel::onAction)
+    EventConsumer(viewModel = viewModel, shareContent)
+}
+
+@Composable
+fun EventConsumer(
+    viewModel: MessageInfoViewModel,
+    shareContent: (String, Int) -> Unit
+) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.eventFlow.collect { event ->
+            when(event) {
+                is ScreenEvents.SendWhatsappMessage ->  shareContent(event.text, event.imageRef)
+            }
+        }
+    }
 }
 
 @Composable
@@ -70,7 +102,9 @@ fun Screen(
 
         Text(
             text = stringResource(id = R.string.preview),
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             textAlign = TextAlign.Start,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
@@ -106,7 +140,9 @@ private fun MakeBoxPreview(
             maxLines = 10,
             textAlign = TextAlign.Start,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(16.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
         )
     }
 }

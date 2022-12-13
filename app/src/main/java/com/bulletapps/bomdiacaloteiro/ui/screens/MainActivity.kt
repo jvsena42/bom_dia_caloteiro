@@ -1,5 +1,6 @@
 package com.bulletapps.bomdiacaloteiro.ui.screens
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +10,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.ScreenMessageInfo
 import com.bulletapps.bomdiacaloteiro.ui.screens.selectMeme.ScreenSelectMeme
+import com.bulletapps.bomdiacaloteiro.util.getBitmapFromResource
+import com.bulletapps.bomdiacaloteiro.util.getImageUri
+import com.bulletapps.bomdiacaloteiro.util.getUriResource
+import com.bulletapps.bomdiacaloteiro.util.intentShare
 import com.bulletapps.bomdiacaloteiro.util.setNavigation
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,7 +45,11 @@ class MainActivity : ComponentActivity() {
         }
 
         composable(MainViewModel.Navigation.MessageInfo.router) {
-            ScreenMessageInfo(selectedMemeRef = mainViewModel.selectedMemeRef)
+            ScreenMessageInfo(selectedMemeRef = mainViewModel.selectedMemeRef) { text, imageRef ->
+                val intent = intentShare(text, getImageUri(imageRef))
+                Intent.createChooser(intent, null)
+                startActivity(intent)
+            }
         }
     }
 
