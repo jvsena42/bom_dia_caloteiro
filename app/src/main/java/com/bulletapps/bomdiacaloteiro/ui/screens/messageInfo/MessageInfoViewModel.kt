@@ -21,6 +21,7 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
     companion object {
         const val LINE_BREAK = "\n"
         const val INITIAL_MESSAGE = "Bom dia, caloteiro!" //todo MOVE DO STRINGS
+        const val PIX_KEY_LABEL = "Chave PIX: "
     }
 
     val uiState = UIState()
@@ -52,7 +53,7 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
         val message =
             uiState.message.value.let { if (it.isNotEmpty()) LINE_BREAK + it else EMPTY_STRING }
         val pixKey =
-            uiState.pixKey.value.let { if (it.isNotEmpty()) LINE_BREAK + it else EMPTY_STRING }
+            uiState.pixKey.value.let { if (it.isNotEmpty()) LINE_BREAK + PIX_KEY_LABEL + it else EMPTY_STRING }
         uiState.fullMessage.value = INITIAL_MESSAGE + message + pixKey
     }
 
