@@ -40,6 +40,7 @@ import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewMode
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenActions
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenEvents
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.UIState
+import com.bulletapps.bomdiacaloteiro.ui.theme.BomDiaCaloteiroTheme
 import com.bulletapps.bomdiacaloteiro.ui.theme.buttonFontSize
 import com.bulletapps.bomdiacaloteiro.ui.theme.buttonHeight
 import com.bulletapps.bomdiacaloteiro.ui.theme.horizontalPadding
@@ -74,44 +75,47 @@ fun Screen(
     uiState: UIState,
     onAction: (ScreenActions) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Spacer(modifier = Modifier.height(8.dp))
-
-        TextTitle(text = stringResource(id = R.string.custom_the_text))
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        MakeFieldMessage(onAction = onAction, uiState = uiState)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        MakeFieldPix(onAction = onAction, uiState = uiState)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = stringResource(id = R.string.preview),
+    BomDiaCaloteiroTheme {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            textAlign = TextAlign.Start,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(8.dp))
 
-        Spacer(modifier = Modifier.height(8.dp))
+            TextTitle(text = stringResource(id = R.string.custom_the_text))
 
-        MakeBoxPreview(onAction = onAction, uiState = uiState)
+            Spacer(modifier = Modifier.height(32.dp))
 
-        Spacer(modifier = Modifier.weight(1f))
+            MakeFieldMessage(onAction = onAction, uiState = uiState)
 
-        MakeButtonShare(uiState = uiState, onAction = onAction)
+            Spacer(modifier = Modifier.height(16.dp))
+
+            MakeFieldPix(onAction = onAction, uiState = uiState)
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = stringResource(id = R.string.preview),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                textAlign = TextAlign.Start,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            MakeBoxPreview(onAction = onAction, uiState = uiState)
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            MakeButtonShare(uiState = uiState, onAction = onAction)
+        }
     }
+
 }
 
 @Composable
