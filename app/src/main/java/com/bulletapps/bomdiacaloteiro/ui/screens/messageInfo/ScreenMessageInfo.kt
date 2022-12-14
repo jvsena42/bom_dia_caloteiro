@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bulletapps.bomdiacaloteiro.R
+import com.bulletapps.bomdiacaloteiro.ui.components.ButtonBottom
 import com.bulletapps.bomdiacaloteiro.ui.components.TextTitle
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.FieldTexts
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenActions
@@ -60,8 +61,8 @@ fun EventConsumer(
 ) {
     LaunchedEffect(key1 = Unit) {
         viewModel.eventFlow.collect { event ->
-            when(event) {
-                is ScreenEvents.SendWhatsappMessage ->  shareContent(event.text, event.imageRef)
+            when (event) {
+                is ScreenEvents.SendWhatsappMessage -> shareContent(event.text, event.imageRef)
             }
         }
     }
@@ -145,20 +146,10 @@ private fun MakeButtonShare(
     uiState: UIState,
     onAction: (ScreenActions) -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(buttonHeight)
-            .background(Color.Yellow)
-            .clickable { onAction.invoke(ScreenActions.OnClickShare) },
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = stringResource(id = R.string.share),
-            fontSize = buttonFontSize,
-            fontWeight = FontWeight.Bold
-        )
-    }
+    ButtonBottom(
+        label = stringResource(id = R.string.share),
+        action = { onAction.invoke(ScreenActions.OnClickShare) },
+    )
 }
 
 @Composable
