@@ -2,8 +2,6 @@
 
 package com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo
 
-import android.content.Intent
-import android.graphics.Bitmap
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -24,7 +22,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -36,13 +33,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bulletapps.bomdiacaloteiro.R
-import com.bulletapps.bomdiacaloteiro.ui.screens.MainActivity
+import com.bulletapps.bomdiacaloteiro.ui.components.TextTitle
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.FieldTexts
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenActions
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenEvents
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.UIState
-import com.bulletapps.bomdiacaloteiro.util.getBitmapFromResource
-import com.bulletapps.bomdiacaloteiro.util.intentShare
 
 @Composable
 fun ScreenMessageInfo(
@@ -82,13 +77,7 @@ fun Screen(
     ) {
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            text = stringResource(id = R.string.custom_the_text),
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Black
-        )
+        TextTitle(text = stringResource(id = R.string.custom_the_text))
 
         Spacer(modifier = Modifier.height(32.dp))
 

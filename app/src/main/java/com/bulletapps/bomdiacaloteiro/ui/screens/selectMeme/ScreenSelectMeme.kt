@@ -21,7 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bulletapps.bomdiacaloteiro.R
+import com.bulletapps.bomdiacaloteiro.ui.components.TextTitle
 import com.bulletapps.bomdiacaloteiro.ui.theme.BomDiaCaloteiroTheme
+import com.bulletapps.bomdiacaloteiro.ui.theme.titleFontWeight
+import com.bulletapps.bomdiacaloteiro.ui.theme.titleSize
 import kotlinx.coroutines.flow.collect
 
 @Composable
@@ -66,13 +69,7 @@ private fun Screen(
                 item {
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    Text(
-                        text = stringResource(id = R.string.select_a_meme),
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Black
-                    )
+                    TextTitle(text = stringResource(id = R.string.select_a_meme))
 
                     Spacer(modifier = Modifier.height(16.dp))
                 }
