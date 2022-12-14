@@ -38,6 +38,7 @@ import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewMode
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenActions
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenEvents
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.UIState
+import com.bulletapps.bomdiacaloteiro.ui.theme.buttonFontSize
 import com.bulletapps.bomdiacaloteiro.ui.theme.buttonHeight
 import com.bulletapps.bomdiacaloteiro.ui.theme.horizontalPadding
 
@@ -127,7 +128,7 @@ private fun MakeBoxPreview(
     ) {
         Text(
             text = fullMessage,
-            fontSize = 16.sp,
+            fontSize = buttonFontSize,
             maxLines = 10,
             textAlign = TextAlign.Start,
             overflow = TextOverflow.Ellipsis,
@@ -154,8 +155,8 @@ private fun MakeButtonShare(
     ) {
         Text(
             text = stringResource(id = R.string.share),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Black
+            fontSize = buttonFontSize,
+            fontWeight = FontWeight.Bold
         )
     }
 }
