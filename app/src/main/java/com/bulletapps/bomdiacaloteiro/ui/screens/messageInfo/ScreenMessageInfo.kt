@@ -38,6 +38,8 @@ import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewMode
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenActions
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenEvents
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.UIState
+import com.bulletapps.bomdiacaloteiro.ui.theme.buttonHeight
+import com.bulletapps.bomdiacaloteiro.ui.theme.horizontalPadding
 
 @Composable
 fun ScreenMessageInfo(
@@ -119,7 +121,7 @@ private fun MakeBoxPreview(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = horizontalPadding)
             .background(Color.Gray),
         contentAlignment = Alignment.Center
     ) {
@@ -130,7 +132,7 @@ private fun MakeBoxPreview(
             textAlign = TextAlign.Start,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(horizontalPadding)
                 .fillMaxWidth()
         )
     }
@@ -145,7 +147,7 @@ private fun MakeButtonShare(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(45.dp)
+            .height(buttonHeight)
             .background(Color.Yellow)
             .clickable { onAction.invoke(ScreenActions.OnClickShare) },
         contentAlignment = Alignment.Center
@@ -169,7 +171,7 @@ private fun MakeFieldMessage(onAction: (ScreenActions) -> Unit, uiState: UIState
         onValueChange = { onAction(ScreenActions.OnTextChanged(FieldTexts.Message(it))) },
         label = { Text(stringResource(R.string.message)) },
         modifier = Modifier
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = horizontalPadding)
             .fillMaxWidth()
     )
 }
@@ -184,7 +186,7 @@ private fun MakeFieldPix(onAction: (ScreenActions) -> Unit, uiState: UIState) {
         onValueChange = { onAction(ScreenActions.OnTextChanged(FieldTexts.PixKey(it))) },
         label = { Text(stringResource(R.string.pix_key)) },
         modifier = Modifier
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = horizontalPadding)
             .fillMaxWidth()
     )
 }
