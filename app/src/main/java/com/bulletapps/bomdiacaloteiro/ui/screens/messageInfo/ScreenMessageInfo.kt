@@ -1,9 +1,8 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 
 package com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,33 +15,30 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bulletapps.bomdiacaloteiro.R
 import com.bulletapps.bomdiacaloteiro.ui.components.ButtonBottom
 import com.bulletapps.bomdiacaloteiro.ui.components.TextTitle
+import com.bulletapps.bomdiacaloteiro.ui.components.TextTitleSmall
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.FieldTexts
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenActions
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.ScreenEvents
 import com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo.MessageInfoViewModel.UIState
 import com.bulletapps.bomdiacaloteiro.ui.theme.BomDiaCaloteiroTheme
 import com.bulletapps.bomdiacaloteiro.ui.theme.buttonFontSize
-import com.bulletapps.bomdiacaloteiro.ui.theme.buttonHeight
 import com.bulletapps.bomdiacaloteiro.ui.theme.horizontalPadding
 
 @Composable
@@ -96,15 +92,7 @@ fun Screen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text(
-                text = stringResource(id = R.string.preview),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                textAlign = TextAlign.Start,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
-            )
+            TextTitleSmall(stringResource(id = R.string.preview))
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -129,11 +117,12 @@ private fun MakeBoxPreview(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = horizontalPadding)
-            .background(Color.Gray),
+            .background(MaterialTheme.colorScheme.surface),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = fullMessage,
+            color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.surface),
             fontSize = buttonFontSize,
             maxLines = 10,
             textAlign = TextAlign.Start,

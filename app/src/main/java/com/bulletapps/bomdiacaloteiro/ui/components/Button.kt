@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +18,7 @@ import com.bulletapps.bomdiacaloteiro.ui.theme.buttonHeight
 
 @Composable
 fun ButtonBottom(label: String, action: () -> Unit) {
-    BomDiaCaloteiroTheme() {
+    BomDiaCaloteiroTheme {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -28,6 +29,7 @@ fun ButtonBottom(label: String, action: () -> Unit) {
         ) {
             Text(
                 text = label,
+                color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.tertiary),
                 fontSize = buttonFontSize,
                 fontWeight = FontWeight.Bold
             )
