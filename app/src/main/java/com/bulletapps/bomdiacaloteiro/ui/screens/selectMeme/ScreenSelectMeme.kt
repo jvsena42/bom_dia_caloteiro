@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bulletapps.bomdiacaloteiro.R
+import com.bulletapps.bomdiacaloteiro.ui.components.AppBar
 import com.bulletapps.bomdiacaloteiro.ui.components.TextTitle
 import com.bulletapps.bomdiacaloteiro.ui.theme.BomDiaCaloteiroTheme
 import com.bulletapps.bomdiacaloteiro.ui.theme.imageHeight
@@ -69,11 +70,7 @@ private fun Screen(
             horizontalAlignment = Alignment.CenterHorizontally,
             content = {
                 item {
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    TextTitle(text = stringResource(id = R.string.select_a_meme))
-
-                    Spacer(modifier = Modifier.height(16.dp))
+                    AppBar(stringResource(id = R.string.select_a_meme))
                 }
 
                 items(list.size) { index ->

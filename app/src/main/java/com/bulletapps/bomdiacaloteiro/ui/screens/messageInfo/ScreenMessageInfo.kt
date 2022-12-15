@@ -15,6 +15,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bulletapps.bomdiacaloteiro.R
+import com.bulletapps.bomdiacaloteiro.ui.components.AppBar
 import com.bulletapps.bomdiacaloteiro.ui.components.ButtonBottom
 import com.bulletapps.bomdiacaloteiro.ui.components.TextTitle
 import com.bulletapps.bomdiacaloteiro.ui.components.TextTitleSmall
@@ -78,9 +82,7 @@ fun Screen(
                 .background(MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(8.dp))
-
-            TextTitle(text = stringResource(id = R.string.custom_the_text))
+            AppBar(stringResource(id = R.string.custom_the_text))
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -117,12 +119,11 @@ private fun MakeBoxPreview(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = horizontalPadding)
-            .background(MaterialTheme.colorScheme.surface),
+            .background(Color.Gray),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = fullMessage,
-            color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.surface),
             fontSize = buttonFontSize,
             maxLines = 10,
             textAlign = TextAlign.Start,
