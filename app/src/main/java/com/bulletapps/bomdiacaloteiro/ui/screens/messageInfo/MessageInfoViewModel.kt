@@ -2,15 +2,12 @@ package com.bulletapps.bomdiacaloteiro.ui.screens.messageInfo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bulletapps.bomdiacaloteiro.R
-import com.bulletapps.bomdiacaloteiro.ui.screens.MainViewModel
 import com.bulletapps.bomdiacaloteiro.util.EMPTY_STRING
 import com.bulletapps.bomdiacaloteiro.util.EventFlow
 import com.bulletapps.bomdiacaloteiro.util.EventFlowImpl
 import com.bulletapps.bomdiacaloteiro.util.NEGATIVE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -18,10 +15,13 @@ import javax.inject.Inject
 class MessageInfoViewModel @Inject constructor() : ViewModel(),
     EventFlow<MessageInfoViewModel.ScreenEvents> by EventFlowImpl() {
 
-    companion object {
+    private companion object {
         const val LINE_BREAK = "\n"
         const val INITIAL_MESSAGE = "Bom dia, caloteiro!" //todo MOVE DO STRINGS
         const val PIX_KEY_LABEL = "Chave PIX: "
+        const val MESSAGE = "Cobre seus amigos usando memes"
+        const val PLAY_STORE_LINK =
+            "https://play.google.com/store/apps/details?id=com.bulletapps.bomdiacaloteiro"
     }
 
     val uiState = UIState()
@@ -50,11 +50,26 @@ class MessageInfoViewModel @Inject constructor() : ViewModel(),
     }
 
     private fun updateFullText() {
-        val message =
-            uiState.message.value.let { if (it.isNotEmpty()) LINE_BREAK + it else EMPTY_STRING }
-        val pixKey =
-            uiState.pixKey.value.let { if (it.isNotEmpty()) LINE_BREAK + PIX_KEY_LABEL + it else EMPTY_STRING }
-        uiState.fullMessage.value = INITIAL_MESSAGE + message + pixKey
+
+        val message = uiState.message.value.let {
+            if (it.isNotEmpty()) {
+                LINE_BREAK + it
+            } else {
+                EMPTY_STRING
+            }
+        }
+
+        val pixKey = uiState.pixKey.value.let {
+            if (it.isNotEmpty()) {
+                LINE_BREAK + PIX_KEY_LABEL + it
+            } else {
+                EMPTY_STRING
+            }
+        }
+
+        val playStoreLink = LINE_BREAK + LINE_BREAK + MESSAGE + LINE_BREAK + PLAY_STORE_LINK
+
+        uiState.fullMessage.value = INITIAL_MESSAGE + message + pixKey + playStoreLink
     }
 
     private fun onTextChanged(fieldText: FieldTexts) = when (fieldText) {
